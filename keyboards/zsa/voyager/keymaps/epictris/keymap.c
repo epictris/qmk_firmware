@@ -341,7 +341,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 switch (held_key) {
                     case KC_NO:
-                        set_mods(MOD_BIT(KC_LSFT));
+                        register_code(KC_LSFT);
+                        // set_mods(MOD_BIT(KC_LSFT));
                         mod_interrupt = false;
                         break;
                     case KC_1 ... KC_0:
@@ -352,6 +353,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         return repeat_held_key(keycode, record);
                 }
             } else {
+                unregister_code(KC_LSFT);
                 clear_mods();
                 if (!mod_interrupt) {
                     set_oneshot_mods(MOD_BIT(KC_LSFT));
@@ -378,6 +380,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 clear_mods();
             } else {
+                unregister_code(KC_LSFT);
+                clear_mods();
                 clear_oneshot_mods();
             }
         case KC_SPC:
