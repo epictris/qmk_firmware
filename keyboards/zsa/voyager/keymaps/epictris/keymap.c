@@ -20,6 +20,12 @@ enum custom_keycodes {
     TM5,
     LAYOUT_MAC,
     LAYOUT_LINUX,
+    COPY,
+    CUT,
+    PASTE,
+    UNDO,
+    ALL,
+    FIND
 };
 
 // RGB_MATRIX_EFFECT(custom_rgb)
@@ -260,27 +266,40 @@ void break_caps_word(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-bool use_os_binding(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        switch (keycode) {
-            case G(KC_C):
-                tap_code16(C(KC_C));
-                return true;
-            case G(KC_V):
-                tap_code16(C(KC_V));
-                return true;
-            case G(KC_A):
-                tap_code16(C(KC_A));
-                return true;
-            case G(KC_X):
-                tap_code16(C(KC_X));
-                return true;
-            case G(KC_Z):
-                tap_code16(C(KC_Z));
-                return true;
+void use_os_binding(uint16_t keycode, keyrecord_t *record) {
+    if (record ->event.pressed) {
+        if (mac_layout) {
+            switch (keycode) {
+                case COPY:
+                    return tap_code16(G(KC_C));
+                case CUT:
+                    return tap_code16(G(KC_X));
+                case PASTE:
+                    return tap_code16(G(KC_V));
+                case UNDO:
+                    return tap_code16(G(KC_Z));
+                case ALL:
+                    return tap_code16(G(KC_A));
+                case FIND:
+                    return tap_code16(G(KC_F));
+            }
+        } else {
+            switch (keycode) {
+                case COPY:
+                    return tap_code16(C(KC_C));
+                case CUT:
+                    return tap_code16(C(KC_X));
+                case PASTE:
+                    return tap_code16(C(KC_V));
+                case UNDO:
+                    return tap_code16(C(KC_Z));
+                case ALL:
+                    return tap_code16(C(KC_A));
+                case FIND:
+                    return tap_code16(C(KC_F));
+            }
         }
     }
-    return false;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -289,13 +308,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     apply_mod_ctl_w(keycode, record);
     apply_mod_bsls(keycode, record);
     break_caps_word(keycode, record);
-
-    if (!mac_layout) {
-        if (use_os_binding(keycode, record)) {
-            return false;
-        }
-    }
-
+    use_os_binding(keycode, record);
 
     switch (keycode) {
         case LAYOUT_MAC:
@@ -461,9 +474,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [2] = LAYOUT(
         MO(4),   KC_7,    KC_8,    KC_9,    KC_0,     KC_F11,                  KC_F12,  KC_1,    KC_2,    KC_3,    KC_4,          MO(4),
-        KC_6,    _______,    KC_HOME, KC_UP,   KC_END,   C(KC_TAB),               SLSH_GT, KC_LALT, C(KC_U), KC_LALT, _______, TM5,
-        _______, KC_LSFT, KC_LEFT, KC_DOWN, KC_RIGHT, KC_DEL,                  _______, KC_N,    C(KC_D), _______, _______,       _______,
-        RGB_VAD, _______, _______, _______, _______,  _______,                 _______, _______, _______, _______, SHEBANG,       RGB_VAI,
+        KC_6,    _______,    KC_HOME, KC_UP,   KC_END, _______,               SLSH_GT, KC_LALT, C(KC_U), KC_LALT, _______, TM5,
+        KC_LSFT, ALL, KC_LEFT, KC_DOWN, KC_RIGHT, KC_DEL,                  _______, KC_N,    C(KC_D), S(KC_I), S(KC_A),       _______,
+        RGB_VAD, FIND, CUT, COPY, PASTE,  UNDO,                 _______, _______, _______, _______, SHEBANG,       RGB_VAI,
                                             _______, MO(2),                    KC_MEH, MO(3)
     ),
     [3] = LAYOUT(
