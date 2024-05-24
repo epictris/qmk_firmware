@@ -18,6 +18,8 @@ enum custom_keycodes {
     TM3,
     TM4,
     TM5,
+    LAYOUT_MAC,
+    LAYOUT_LINUX,
 };
 
 // RGB_MATRIX_EFFECT(custom_rgb)
@@ -34,6 +36,7 @@ enum custom_keycodes {
 //
 // #endif
 
+bool mac_layout = true;
 
 void apply_tmux_prefix(uint16_t keycode) {
     tap_code16(C(KC_B));
@@ -165,12 +168,13 @@ bool set_shifted_key(uint16_t keycode, uint16_t shifted_keycode, keyrecord_t *re
         } else {
             tap_code16(keycode);
         }
+    } else {
     }
     clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
     return true;
 }
 
-const uint16_t PROGMEM combo_gui_a[] = {KC_QUES, KC_A,  COMBO_END};
+const uint16_t PROGMEM combo_gui_a[] = {KC_P, KC_B,  COMBO_END};
 const uint16_t PROGMEM combo_gui_f[] = {KC_T, KC_G,  COMBO_END};
 const uint16_t PROGMEM combo_gui_z[] = {KC_D, KC_V,  COMBO_END};
 const uint16_t PROGMEM combo_gui_x[] = {KC_Z, KC_X,  COMBO_END};
@@ -188,13 +192,11 @@ const uint16_t PROGMEM combo_gui1[] = {KC_C, KC_P,  COMBO_END};
 const uint16_t PROGMEM combo_gui2[] = {KC_L, KC_U,  COMBO_END};
 const uint16_t PROGMEM combo_gui_sft1[] = {KC_W, KC_C, KC_P, COMBO_END};
 const uint16_t PROGMEM combo_gui_sft2[] = {KC_L, KC_U, KC_Y, COMBO_END};
+const uint16_t PROGMEM combo_ctl_sft_c[] = {KC_X, KC_F, KC_D, COMBO_END};
+const uint16_t PROGMEM combo_ctl_sft_v[] = {KC_F, KC_D, KC_V, COMBO_END};
 
 const uint16_t PROGMEM combo_mod_tmux1[] = {KC_W, KC_C,  COMBO_END};
 const uint16_t PROGMEM combo_mod_tmux2[] = {KC_U, KC_Y,  COMBO_END};
-
-const uint16_t PROGMEM combo_mod_ctl_w2[] = {KC_P, KC_B,  COMBO_END};
-const uint16_t PROGMEM combo_mod_ctl_w1[] = {KC_J, KC_L,  COMBO_END};
-
 
 combo_t key_combos[] = {
     COMBO(combo_gui1, KC_LGUI),
@@ -207,8 +209,6 @@ combo_t key_combos[] = {
     COMBO(combo_ctl_sft2, C(KC_LSFT)),
     COMBO(combo_mod_tmux1, MOD_TMUX),
     COMBO(combo_mod_tmux2, MOD_TMUX),
-    COMBO(combo_mod_ctl_w1, MOD_CTL_W),
-    COMBO(combo_mod_ctl_w2, MOD_CTL_W),
     COMBO(combo_gui_a, G(KC_A)),
     COMBO(combo_gui_f, G(KC_F)),
     COMBO(combo_gui_z, G(KC_Z)),
@@ -217,7 +217,8 @@ combo_t key_combos[] = {
     COMBO(combo_gui_v, G(KC_V)),
     COMBO(combo_gui_k, G(KC_K)),
     COMBO(combo_gui_n, G(KC_N)),
-
+    COMBO(combo_ctl_sft_c, C(S(KC_C))),
+    COMBO(combo_ctl_sft_v, C(S(KC_V)))
 };
 
 uint16_t held_key = KC_NO;
@@ -259,6 +260,28 @@ void break_caps_word(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+bool use_os_binding(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        switch (keycode) {
+            case G(KC_C):
+                tap_code16(C(KC_C));
+                return true;
+            case G(KC_V):
+                tap_code16(C(KC_V));
+                return true;
+            case G(KC_A):
+                tap_code16(C(KC_A));
+                return true;
+            case G(KC_X):
+                tap_code16(C(KC_X));
+                return true;
+            case G(KC_Z):
+                tap_code16(C(KC_Z));
+                return true;
+        }
+    }
+    return false;
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
@@ -267,8 +290,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     apply_mod_bsls(keycode, record);
     break_caps_word(keycode, record);
 
+    if (!mac_layout) {
+        if (use_os_binding(keycode, record)) {
+            return false;
+        }
+    }
+
 
     switch (keycode) {
+        case LAYOUT_MAC:
+            mac_layout = true;
+            break;
+        case LAYOUT_LINUX:
+            mac_layout = false;
+            break;
         case KC_1 ... KC_0:
             set_held_key(keycode, record);
         case KC_A ... KC_Z:
@@ -381,7 +416,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 clear_mods();
             } else {
                 unregister_code(KC_LSFT);
-                clear_mods();
                 clear_oneshot_mods();
             }
         case KC_SPC:
@@ -426,10 +460,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_SPC, MO(2),                  _______,  _______
     ),
     [2] = LAYOUT(
-        MO(4), KC_7,     KC_8,    KC_9,    KC_0,    KC_F11,                    KC_F12,  TM1,    TM2,    TM3,    TM4,    MO(4),
-        KC_6, C(S(KC_TAB)), KC_HOME, KC_UP, KC_END, C(KC_TAB),              SLSH_GT,  KC_LALT,    C(KC_U),    LSFT(KC_LALT),  KC_LALT,   TM5,
-        KC_CIRC, LSFT(KC_I), KC_LEFT, KC_DOWN, KC_RIGHT, KC_DEL,               _______, KC_ENT,  C(KC_D), _______, LSFT(KC_A),  KC_DLR,
-        RGB_VAD, _______,  _______, _______, _______,  _______,                 _______, _______, _______, _______, SHEBANG, RGB_VAI,
+        MO(4),   KC_7,    KC_8,    KC_9,    KC_0,     KC_F11,                  KC_F12,  KC_1,    KC_2,    KC_3,    KC_4,          MO(4),
+        KC_6,    _______,    KC_HOME, KC_UP,   KC_END,   C(KC_TAB),               SLSH_GT, KC_LALT, C(KC_U), KC_LALT, _______, TM5,
+        _______, KC_LSFT, KC_LEFT, KC_DOWN, KC_RIGHT, KC_DEL,                  _______, KC_N,    C(KC_D), _______, _______,       _______,
+        RGB_VAD, _______, _______, _______, _______,  _______,                 _______, _______, _______, _______, SHEBANG,       RGB_VAI,
                                             _______, MO(2),                    KC_MEH, MO(3)
     ),
     [3] = LAYOUT(
@@ -443,7 +477,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,                  KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______,
         KC_F6,   _______, _______, _______, _______, _______,                 _______, _______, _______, _______, _______, KC_F5,
         _______, _______, _______, _______, _______, _______,                 _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______,                 _______, _______, _______, _______, _______, _______,
+        LAYOUT_MAC, _______, _______, _______, _______, _______,                 _______, _______, _______, _______, _______, LAYOUT_LINUX,
                                                      _______, _______,        _______, _______
     ),
 };
