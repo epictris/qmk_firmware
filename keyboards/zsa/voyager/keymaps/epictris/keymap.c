@@ -192,6 +192,10 @@ const uint16_t PROGMEM combo_gui_k[] = {KC_K, KC_H,  COMBO_END};
 
 const uint16_t PROGMEM combo_ctl1[] = {KC_S, KC_T,  COMBO_END};
 const uint16_t PROGMEM combo_ctl2[] = {KC_N, KC_E,  COMBO_END};
+
+const uint16_t PROGMEM combo_sft1[] = {KC_R, KC_S,  COMBO_END};
+const uint16_t PROGMEM combo_sft2[] = {KC_E, KC_I,  COMBO_END};
+
 const uint16_t PROGMEM combo_ctl_sft1[] = {KC_R, KC_S, KC_T, COMBO_END};
 const uint16_t PROGMEM combo_ctl_sft2[] = {KC_N, KC_E, KC_I, COMBO_END};
 const uint16_t PROGMEM combo_gui1[] = {KC_C, KC_P,  COMBO_END};
@@ -211,6 +215,8 @@ combo_t key_combos[] = {
     COMBO(combo_gui_sft2, G(KC_LSFT)),
     COMBO(combo_ctl1, KC_LCTL),
     COMBO(combo_ctl2, KC_LCTL),
+    COMBO(combo_sft1, KC_LSFT),
+    COMBO(combo_sft2, KC_LSFT),
     COMBO(combo_ctl_sft1, C(KC_LSFT)),
     COMBO(combo_ctl_sft2, C(KC_LSFT)),
     COMBO(combo_mod_tmux1, MOD_TMUX),
@@ -393,10 +399,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         // set_mods(MOD_BIT(KC_LSFT));
                         mod_interrupt = false;
                         break;
-                    case KC_1 ... KC_0:
-                        clear_mods();
-                        tap_code(KC_DOT);
-                        return false;
                     default:
                         return repeat_held_key(keycode, record);
                 }
@@ -409,7 +411,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
         case MO(2):
-            if (record->event.pressed) {
+            if (record->event.pressed) {;;
                 if (held_key != KC_NO) {
                     switch (held_key) {
                         case KC_1 ... KC_0:
@@ -461,28 +463,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
         MO(4), KC_7,     KC_8,    KC_9,    KC_0,    KC_F11,                    KC_F12,  KC_1,    KC_2,    KC_3,    KC_4,    MO(4),
         KC_6,  KC_Q,    KC_W,    KC_C,    KC_P,    KC_B,                             KC_J,    KC_L,    KC_U,     KC_Y,   KC_QUOT,  KC_5,
-        KC_QUES,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                             KC_M,    KC_N,    KC_E,     KC_I,   KC_O,     KC_COMM,
+        KC_COMM,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                             KC_M,    KC_N,    KC_E,     KC_I,   KC_O,     KC_QUES,
         KC_KB_VOLUME_DOWN,  KC_Z,    KC_X,    KC_F,    KC_D,    KC_V,                             KC_K,    KC_H,    KC_UNDS,  KC_DOT,  KC_SLSH,  KC_KB_VOLUME_UP,
                                    KC_SPC, MO(2),                             MOD_SHIFT, OSL(1)
     ),
     [1] = LAYOUT(
         MO(4), KC_7,     KC_8,    KC_9,    KC_0,    KC_F11,                    KC_F12,  KC_1,    KC_2,    KC_3,    KC_4,    MO(4),
         KC_6, KC_GRV, KC_LBRC, KC_TAB, KC_LT, KC_RBRC,                         KC_PLUS,  KC_GT,    KC_MINS,    KC_EXLM,    KC_AT,    KC_5,
-        KC_CIRC, KC_BSLS, KC_LPRN,  KC_DQT, KC_EQL, KC_RPRN,                  KC_BSPC,  KC_ENT, KC_ESC, KC_COLN, KC_SCLN, KC_DLR,
+        KC_CIRC, KC_SCLN, KC_LPRN,  KC_DQT, KC_EQL, KC_RPRN,                  KC_BSPC,  KC_ENT, KC_ESC, KC_COLN, KC_BSLS, KC_DLR,
         KC_BRID, KC_TILD,   KC_LCBR, KC_HASH, KC_PERC, KC_RCBR,                KC_AMPR, KC_PIPE, KC_ASTR, _______, TILD_SLSH, KC_BRIU,
                                             KC_SPC, MO(2),                  _______,  _______
     ),
     [2] = LAYOUT(
         MO(4),   KC_7,    KC_8,    KC_9,    KC_0,     KC_F11,                  KC_F12,  KC_1,    KC_2,    KC_3,    KC_4,          MO(4),
-        KC_6,    _______,    KC_HOME, KC_UP,   KC_END, _______,               SLSH_GT, KC_LALT, C(KC_U), KC_LALT, _______, TM5,
-        KC_LSFT, ALL, KC_LEFT, KC_DOWN, KC_RIGHT, KC_DEL,                  _______, KC_N,    C(KC_D), S(KC_I), S(KC_A),       _______,
-        RGB_VAD, FIND, CUT, COPY, PASTE,  UNDO,                 _______, _______, _______, _______, SHEBANG,       RGB_VAI,
+        KC_6,    _______, KC_HOME, KC_UP,   KC_END,   FIND,                    _______, C(KC_L), C(KC_U), _______, _______, TM5,
+        S(KC_I), KC_LALT, KC_LEFT, KC_DOWN, KC_RIGHT, KC_DEL,                  _______, C(KC_N), C(KC_D), C(KC_I), C(KC_O),       S(KC_A),
+        RGB_VAD, FIND,    CUT,     COPY,    PASTE,    UNDO,                    _______, _______, _______, _______, SHEBANG,       RGB_VAI,
                                             _______, MO(2),                    KC_MEH, MO(3)
     ),
     [3] = LAYOUT(
         MO(4), KC_7,     KC_8,    KC_9,    KC_0,    KC_F11,                    KC_F12,  KC_1,    KC_2,    KC_3,    KC_4,    MO(4),
         KC_6, KC_GRV, KC_LBRC, KC_TAB, KC_LT, KC_RBRC,                         KC_PLUS,  KC_GT,    KC_MINS,    KC_EXLM,    KC_AT,    KC_5,
-        KC_CIRC, KC_BSLS, KC_LPRN,  KC_DQT, KC_EQL, KC_RPRN,                  KC_BSPC,  KC_ENT, KC_ESC, KC_COLN, KC_SCLN, KC_DLR,
+        KC_CIRC, KC_SCLN, KC_LPRN,  KC_DQT, KC_EQL, KC_RPRN,                  KC_BSPC,  KC_ENT, KC_ESC, KC_COLN, KC_BSLS, KC_DLR,
         KC_BRID, KC_TILD,   KC_LCBR, KC_HASH, KC_PERC, KC_RCBR,                KC_AMPR, KC_PIPE, KC_ASTR, _______, _______, KC_BRIU,
                                             KC_SPC, MO(2),                  _______,  _______
     ),
