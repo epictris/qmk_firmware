@@ -180,12 +180,6 @@ bool set_shifted_key(uint16_t keycode, uint16_t shifted_keycode, keyrecord_t *re
     return true;
 }
 
-const uint16_t PROGMEM combo_gui_a[] = {KC_P, KC_B,  COMBO_END};
-const uint16_t PROGMEM combo_gui_f[] = {KC_T, KC_G,  COMBO_END};
-const uint16_t PROGMEM combo_gui_z[] = {KC_D, KC_V,  COMBO_END};
-const uint16_t PROGMEM combo_gui_x[] = {KC_Z, KC_X,  COMBO_END};
-const uint16_t PROGMEM combo_gui_c[] = {KC_X, KC_F,  COMBO_END};
-const uint16_t PROGMEM combo_gui_v[] = {KC_F, KC_D,  COMBO_END};
 
 const uint16_t PROGMEM combo_gui_n[] = {KC_M, KC_N,  COMBO_END};
 const uint16_t PROGMEM combo_gui_k[] = {KC_K, KC_H,  COMBO_END};
@@ -196,39 +190,61 @@ const uint16_t PROGMEM combo_ctl2[] = {KC_N, KC_E,  COMBO_END};
 const uint16_t PROGMEM combo_sft1[] = {KC_R, KC_S,  COMBO_END};
 const uint16_t PROGMEM combo_sft2[] = {KC_E, KC_I,  COMBO_END};
 
-const uint16_t PROGMEM combo_ctl_sft1[] = {KC_R, KC_S, KC_T, COMBO_END};
-const uint16_t PROGMEM combo_ctl_sft2[] = {KC_N, KC_E, KC_I, COMBO_END};
+const uint16_t PROGMEM combo_alt1[] = {KC_A, KC_R,  COMBO_END};
+const uint16_t PROGMEM combo_alt2[] = {KC_I, KC_O,  COMBO_END};
+
 const uint16_t PROGMEM combo_gui1[] = {KC_C, KC_P,  COMBO_END};
 const uint16_t PROGMEM combo_gui2[] = {KC_L, KC_U,  COMBO_END};
+
+const uint16_t PROGMEM combo_ctl_sft1[] = {KC_R, KC_S, KC_T, COMBO_END};
+const uint16_t PROGMEM combo_ctl_sft2[] = {KC_N, KC_E, KC_I, COMBO_END};
+
 const uint16_t PROGMEM combo_gui_sft1[] = {KC_W, KC_C, KC_P, COMBO_END};
 const uint16_t PROGMEM combo_gui_sft2[] = {KC_L, KC_U, KC_Y, COMBO_END};
-const uint16_t PROGMEM combo_ctl_sft_c[] = {KC_X, KC_F, KC_D, COMBO_END};
-const uint16_t PROGMEM combo_ctl_sft_v[] = {KC_F, KC_D, KC_V, COMBO_END};
+
+const uint16_t PROGMEM combo_ctl_alt_sft1[] = {KC_A, KC_R, KC_S, KC_T, COMBO_END};
+const uint16_t PROGMEM combo_ctl_alt_sft2[] = {KC_N, KC_E, KC_I, KC_O, COMBO_END};
+
+const uint16_t PROGMEM combo_gui_alt_sft1[] = {KC_Q, KC_W, KC_C, KC_P, COMBO_END};
+const uint16_t PROGMEM combo_gui_alt_sft2[] = {KC_L, KC_U, KC_Y, KC_QUOT, COMBO_END};
 
 const uint16_t PROGMEM combo_mod_tmux1[] = {KC_W, KC_C,  COMBO_END};
 const uint16_t PROGMEM combo_mod_tmux2[] = {KC_U, KC_Y,  COMBO_END};
 
+const uint16_t PROGMEM combo_ctl_sft_c[] = {KC_X, KC_F,  COMBO_END};
+const uint16_t PROGMEM combo_ctl_sft_v[] = {KC_F, KC_D,  COMBO_END};
+
 combo_t key_combos[] = {
-    COMBO(combo_gui1, KC_LGUI),
-    COMBO(combo_gui2, KC_LGUI),
-    COMBO(combo_gui_sft1, G(KC_LSFT)),
-    COMBO(combo_gui_sft2, G(KC_LSFT)),
+    COMBO(combo_gui_n, G(KC_N)),
+    COMBO(combo_gui_k, G(KC_K)),
+
     COMBO(combo_ctl1, KC_LCTL),
     COMBO(combo_ctl2, KC_LCTL),
+
     COMBO(combo_sft1, KC_LSFT),
     COMBO(combo_sft2, KC_LSFT),
+
+    COMBO(combo_alt1, KC_LALT),
+    COMBO(combo_alt2, KC_LALT),
+
+    COMBO(combo_gui1, KC_LGUI),
+    COMBO(combo_gui2, KC_LGUI),
+
     COMBO(combo_ctl_sft1, C(KC_LSFT)),
     COMBO(combo_ctl_sft2, C(KC_LSFT)),
+
+    COMBO(combo_gui_sft1, G(KC_LSFT)),
+    COMBO(combo_gui_sft2, G(KC_LSFT)),
+
+    COMBO(combo_ctl_alt_sft1, C(A(KC_LSFT))),
+    COMBO(combo_ctl_alt_sft2, C(A(KC_LSFT))),
+
+    COMBO(combo_gui_alt_sft1, G(A(KC_LSFT))),
+    COMBO(combo_gui_alt_sft2, G(A(KC_LSFT))),
+
     COMBO(combo_mod_tmux1, MOD_TMUX),
     COMBO(combo_mod_tmux2, MOD_TMUX),
-    COMBO(combo_gui_a, G(KC_A)),
-    COMBO(combo_gui_f, G(KC_F)),
-    COMBO(combo_gui_z, G(KC_Z)),
-    COMBO(combo_gui_x, G(KC_X)),
-    COMBO(combo_gui_c, G(KC_C)),
-    COMBO(combo_gui_v, G(KC_V)),
-    COMBO(combo_gui_k, G(KC_K)),
-    COMBO(combo_gui_n, G(KC_N)),
+
     COMBO(combo_ctl_sft_c, C(S(KC_C))),
     COMBO(combo_ctl_sft_v, C(S(KC_V)))
 };
@@ -463,7 +479,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
         MO(4), KC_7,     KC_8,    KC_9,    KC_0,    KC_F11,                    KC_F12,  KC_1,    KC_2,    KC_3,    KC_4,    MO(4),
         KC_6,  KC_Q,    KC_W,    KC_C,    KC_P,    KC_B,                             KC_J,    KC_L,    KC_U,     KC_Y,   KC_QUOT,  KC_5,
-        KC_COMM,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                             KC_M,    KC_N,    KC_E,     KC_I,   KC_O,     KC_QUES,
+        KC_QUES,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                             KC_M,    KC_N,    KC_E,     KC_I,   KC_O,     KC_COMM,
         KC_KB_VOLUME_DOWN,  KC_Z,    KC_X,    KC_F,    KC_D,    KC_V,                             KC_K,    KC_H,    KC_UNDS,  KC_DOT,  KC_SLSH,  KC_KB_VOLUME_UP,
                                    KC_SPC, MO(2),                             MOD_SHIFT, OSL(1)
     ),
@@ -475,10 +491,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_SPC, MO(2),                  _______,  _______
     ),
     [2] = LAYOUT(
-        MO(4),   KC_7,    KC_8,    KC_9,    KC_0,     KC_F11,                  KC_F12,  KC_1,    KC_2,    KC_3,    KC_4,          MO(4),
-        KC_6,    _______, KC_HOME, KC_UP,   KC_END,   FIND,                    _______, C(KC_L), C(KC_U), _______, _______, TM5,
-        S(KC_I), KC_LALT, KC_LEFT, KC_DOWN, KC_RIGHT, KC_DEL,                  _______, C(KC_N), C(KC_D), C(KC_I), C(KC_O),       S(KC_A),
-        RGB_VAD, FIND,    CUT,     COPY,    PASTE,    UNDO,                    _______, _______, _______, _______, SHEBANG,       RGB_VAI,
+        MO(4),   A(KC_7), A(KC_8), A(KC_9), A(KC_0), KC_F11,                   KC_F12,  A(KC_1), A(KC_2), A(KC_3), A(KC_4), MO(4),
+        A(KC_6),    KC_Q, KC_HOME, KC_UP,   KC_END,   KC_DEL,                  KC_PGUP, C(KC_L), C(KC_U), _______, _______, A(KC_5),
+        S(KC_I), ALL, KC_LEFT, KC_DOWN, KC_RIGHT, KC_G,                        KC_PGDN, C(KC_N), C(KC_D), C(KC_I), C(KC_O),       S(KC_A),
+        RGB_VAD, UNDO,    CUT,     COPY,    PASTE,    FIND,                    _______, _______, _______, _______, SHEBANG,       RGB_VAI,
                                             _______, MO(2),                    KC_MEH, MO(3)
     ),
     [3] = LAYOUT(
