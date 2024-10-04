@@ -202,6 +202,9 @@ const uint16_t PROGMEM combo_ctl_sft2[] = {KC_N, KC_E, KC_I, COMBO_END};
 const uint16_t PROGMEM combo_gui_sft1[] = {KC_W, KC_C, KC_P, COMBO_END};
 const uint16_t PROGMEM combo_gui_sft2[] = {KC_L, KC_U, KC_Y, COMBO_END};
 
+const uint16_t PROGMEM combo_alt_sft1[] = {KC_A, KC_R, KC_S, COMBO_END};
+const uint16_t PROGMEM combo_alt_sft2[] = {KC_E, KC_I, KC_O, COMBO_END};
+
 const uint16_t PROGMEM combo_ctl_alt_sft1[] = {KC_A, KC_R, KC_S, KC_T, COMBO_END};
 const uint16_t PROGMEM combo_ctl_alt_sft2[] = {KC_N, KC_E, KC_I, KC_O, COMBO_END};
 
@@ -235,6 +238,9 @@ combo_t key_combos[] = {
 
     COMBO(combo_gui_sft1, G(KC_LSFT)),
     COMBO(combo_gui_sft2, G(KC_LSFT)),
+
+    COMBO(combo_alt_sft1, A(KC_LSFT)),
+    COMBO(combo_alt_sft2, A(KC_LSFT)),
 
     COMBO(combo_ctl_alt_sft1, C(A(KC_LSFT))),
     COMBO(combo_ctl_alt_sft2, C(A(KC_LSFT))),
