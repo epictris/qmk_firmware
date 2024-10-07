@@ -6,10 +6,81 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 #include QMK_KEYBOARD_H
 
+#define VOL_DN KC_KB_VOLUME_DOWN
+#define VOL_UP KC_KB_VOLUME_UP
+
+// LAYER 0 (BASE)
+#define L0_L4   _______,    KC_7,       KC_8,       KC_9,       KC_0,       MO(4)
+#define L0_L3   KC_6,       KC_Q,       KC_W,       KC_C,       KC_P,       KC_B
+#define L0_L2   KC_QUES,    KC_A,       KC_R,       KC_S,       KC_T,       KC_G
+#define L0_L1   VOL_DN,     KC_Z,       KC_X,       KC_F,       KC_D,       KC_V
+#define L0_L0   KC_SPC,     MO(2)
+
+#define L0_R4   MO(4),      KC_1,       KC_2,       KC_3,       KC_4,       _______
+#define L0_R3   KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_5
+#define L0_R2   KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       KC_COMM
+#define L0_R1   KC_K,       KC_H,       KC_UNDS,    KC_DOT,     KC_SLSH,    VOL_UP
+#define L0_R0   M_SHIFT,    OSL(1)
+
+
+// LAYER 1 (Symbols)
+#define L1_L4   _______,    KC_7,       KC_8,       KC_9,       KC_0,       _______
+#define L1_L3   KC_6,       KC_GRV,     KC_LBRC,    KC_TAB,     KC_LT,      KC_RBRC
+#define L1_L2   KC_CIRC,    KC_SCLN,    KC_LPRN,    KC_DQT,     KC_EQL,     KC_RPRN
+#define L1_L1   KC_BRID,    KC_TILD,    KC_LCBR,    KC_HASH,    KC_PERC,    KC_RCBR
+#define L1_L0   KC_SPC,     MO(2)
+
+#define L1_R4   _______,    KC_1,       KC_2,       KC_3,       KC_4,       _______
+#define L1_R3   KC_PLUS,    KC_GT,      KC_MINS,    KC_EXLM,    KC_AT,      KC_5
+#define L1_R2   KC_BSPC,    KC_ENT,     KC_ESC,     KC_COLN,    KC_BSLS,    KC_DLR
+#define L1_R1   KC_AMPR,    KC_PIPE,    KC_ASTR,    _______,    TILD_SLSH,  KC_BRIU
+#define L1_R0   _______,    _______
+
+
+// LAYER 2 (Navigation)
+#define L2_L4   _______,    A(KC_7),    A(KC_8),    A(KC_9),    A(KC_0),    _______
+#define L2_L3   A(KC_6),    KC_Q,       KC_HOME,    KC_UP,      KC_END,     KC_DEL
+#define L2_L2   S(KC_I),    ALL,        KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_G
+#define L2_L1   RGB_VAD,    UNDO,       CUT,        COPY,       PASTE,      FIND
+#define L2_L0   _______,    MO(2)
+
+#define L2_R4   _______,     A(KC_1),    A(KC_2),    A(KC_3),    A(KC_4),    _______
+#define L2_R3   KC_PGUP,    C(KC_L),    C(KC_U),    _______,    _______,    A(KC_5)
+#define L2_R2   KC_PGDN,    C(KC_N),    C(KC_D),    C(KC_I),    C(KC_O),    S(KC_A)
+#define L2_R1   _______,    _______,    _______,    _______,    SHEBANG,    RGB_VAI
+#define L2_R0   KC_MEH,     MO(3)
+
+
+// LAYER 4 (Functions)
+#define L4_L4   KC_F11,     KC_F7,      KC_F8,      KC_F9,      KC_F10,     _______
+#define L4_L3   KC_F6,      _______,    _______,    _______,    _______,    _______
+#define L4_L2   _______,    _______,    _______,    _______,    _______,    _______
+#define L4_L1   USE_MAC,    _______,    _______,    _______,    _______,    _______
+#define L4_L0   _______,    _______
+
+#define L4_R4   _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F12
+#define L4_R3   _______, _______, _______, _______, _______, KC_F5
+#define L4_R2   _______, _______, _______, _______, _______, _______
+#define L4_R1   _______, _______, _______, _______, _______, USE_LNX
+#define L4_R0   _______, _______
+
+
+#define _LAYOUT(x) LAYOUT(x)
+
+#define _L0 L0_L4, L0_R4, L0_L3, L0_R3, L0_L2, L0_R2, L0_L1, L0_R1, L0_L0, L0_R0
+#define _L1 L1_L4, L1_R4, L1_L3, L1_R3, L1_L2, L1_R2, L1_L1, L1_R1, L1_L0, L1_R0
+#define _L2 L2_L4, L2_R4, L2_L3, L2_R3, L2_L2, L2_R2, L2_L1, L2_R1, L2_L0, L2_R0
+#define _L4 L4_L4, L4_R4, L4_L3, L4_R3, L4_L4, L4_R2, L4_L1, L4_R1, L4_L0, L4_R0
+
+#define L0 _LAYOUT(_L0)
+#define L1 _LAYOUT(_L1)
+#define L2 _LAYOUT(_L2)
+#define L4 _LAYOUT(_L4)
+
 enum custom_keycodes {
     MOD_TMUX = SAFE_RANGE,
     MOD_CTL_W,
-    MOD_SHIFT,
+    M_SHIFT,
     TILD_SLSH,
     SHEBANG,
     SLSH_GT,
@@ -18,8 +89,8 @@ enum custom_keycodes {
     TM3,
     TM4,
     TM5,
-    LAYOUT_MAC,
-    LAYOUT_LINUX,
+    USE_MAC,
+    USE_LNX,
     COPY,
     CUT,
     PASTE,
@@ -28,19 +99,6 @@ enum custom_keycodes {
     FIND
 };
 
-// RGB_MATRIX_EFFECT(custom_rgb)
-//
-// #ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
-//
-// static bool custom_rgb() {
-//     RGB_MATRIX_USE_LIMITS(led_min; led_max);
-//     for (uint8_t i = led_min; i < led_nax; i++) {
-//         rgb_matrix_set_color(i, i, i, i);
-//     }
-//     return rbg_matrix_check_finished_leds(led_max);
-// }
-//
-// #endif
 
 bool mac_layout = true;
 
@@ -77,7 +135,7 @@ void apply_mod_ctl_w(uint16_t keycode, keyrecord_t *record) {
     switch(keycode) {
         case OSL(1):
         case MO(2):
-        case MOD_SHIFT:
+        case M_SHIFT:
         case OSM(KC_LSFT):
             break;
         case MOD_CTL_W:
@@ -107,7 +165,7 @@ void apply_mod_tmux(uint16_t keycode, keyrecord_t *record) {
     switch(keycode) {
         case OSL(1):
         case MO(2):
-        case MOD_SHIFT:
+        case M_SHIFT:
         case OSM(KC_LSFT):
         case KC_LALT:
             break;
@@ -339,10 +397,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     use_os_binding(keycode, record);
 
     switch (keycode) {
-        case LAYOUT_MAC:
+        case USE_MAC:
             mac_layout = true;
             break;
-        case LAYOUT_LINUX:
+        case USE_LNX:
             mac_layout = false;
             break;
         case KC_1 ... KC_0:
@@ -413,7 +471,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_GRV:
             set_shifted_key(keycode, keycode, record);
             return false;
-        case MOD_SHIFT:
+        case M_SHIFT:
             if (record->event.pressed) {
                 switch (held_key) {
                     case KC_NO:
@@ -469,7 +527,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch(keycode) {
-        case MOD_SHIFT:
+        case M_SHIFT:
         // case MO(2):
         case OSL(1):
             break;
@@ -482,39 +540,9 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT(
-        MO(4), KC_7,     KC_8,    KC_9,    KC_0,    KC_F11,                    KC_F12,  KC_1,    KC_2,    KC_3,    KC_4,    MO(4),
-        KC_6,  KC_Q,    KC_W,    KC_C,    KC_P,    KC_B,                             KC_J,    KC_L,    KC_U,     KC_Y,   KC_QUOT,  KC_5,
-        KC_QUES,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                             KC_M,    KC_N,    KC_E,     KC_I,   KC_O,     KC_COMM,
-        KC_KB_VOLUME_DOWN,  KC_Z,    KC_X,    KC_F,    KC_D,    KC_V,                             KC_K,    KC_H,    KC_UNDS,  KC_DOT,  KC_SLSH,  KC_KB_VOLUME_UP,
-                                   KC_SPC, MO(2),                             MOD_SHIFT, OSL(1)
-    ),
-    [1] = LAYOUT(
-        MO(4), KC_7,     KC_8,    KC_9,    KC_0,    KC_F11,                    KC_F12,  KC_1,    KC_2,    KC_3,    KC_4,    MO(4),
-        KC_6, KC_GRV, KC_LBRC, KC_TAB, KC_LT, KC_RBRC,                         KC_PLUS,  KC_GT,    KC_MINS,    KC_EXLM,    KC_AT,    KC_5,
-        KC_CIRC, KC_SCLN, KC_LPRN,  KC_DQT, KC_EQL, KC_RPRN,                  KC_BSPC,  KC_ENT, KC_ESC, KC_COLN, KC_BSLS, KC_DLR,
-        KC_BRID, KC_TILD,   KC_LCBR, KC_HASH, KC_PERC, KC_RCBR,                KC_AMPR, KC_PIPE, KC_ASTR, _______, TILD_SLSH, KC_BRIU,
-                                            KC_SPC, MO(2),                  _______,  _______
-    ),
-    [2] = LAYOUT(
-        MO(4),   A(KC_7), A(KC_8), A(KC_9), A(KC_0), KC_F11,                   KC_F12,  A(KC_1), A(KC_2), A(KC_3), A(KC_4), MO(4),
-        A(KC_6),    KC_Q, KC_HOME, KC_UP,   KC_END,   KC_DEL,                  KC_PGUP, C(KC_L), C(KC_U), _______, _______, A(KC_5),
-        S(KC_I), ALL, KC_LEFT, KC_DOWN, KC_RIGHT, KC_G,                        KC_PGDN, C(KC_N), C(KC_D), C(KC_I), C(KC_O),       S(KC_A),
-        RGB_VAD, UNDO,    CUT,     COPY,    PASTE,    FIND,                    _______, _______, _______, _______, SHEBANG,       RGB_VAI,
-                                            _______, MO(2),                    KC_MEH, MO(3)
-    ),
-    [3] = LAYOUT(
-        MO(4), KC_7,     KC_8,    KC_9,    KC_0,    KC_F11,                    KC_F12,  KC_1,    KC_2,    KC_3,    KC_4,    MO(4),
-        KC_6, KC_GRV, KC_LBRC, KC_TAB, KC_LT, KC_RBRC,                         KC_PLUS,  KC_GT,    KC_MINS,    KC_EXLM,    KC_AT,    KC_5,
-        KC_CIRC, KC_SCLN, KC_LPRN,  KC_DQT, KC_EQL, KC_RPRN,                  KC_BSPC,  KC_ENT, KC_ESC, KC_COLN, KC_BSLS, KC_DLR,
-        KC_BRID, KC_TILD,   KC_LCBR, KC_HASH, KC_PERC, KC_RCBR,                KC_AMPR, KC_PIPE, KC_ASTR, _______, _______, KC_BRIU,
-                                            KC_SPC, MO(2),                  _______,  _______
-    ),
-    [4] = LAYOUT(
-        _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,                  KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______,
-        KC_F6,   _______, _______, _______, _______, _______,                 _______, _______, _______, _______, _______, KC_F5,
-        _______, _______, _______, _______, _______, _______,                 _______, _______, _______, _______, _______, _______,
-        LAYOUT_MAC, _______, _______, _______, _______, _______,                 _______, _______, _______, _______, _______, LAYOUT_LINUX,
-                                                     _______, _______,        _______, _______
-    ),
+    [0] = L0,
+    [1] = L1,
+    [2] = L2,
+    [3] = L1,
+    [4] = L4,
 };
