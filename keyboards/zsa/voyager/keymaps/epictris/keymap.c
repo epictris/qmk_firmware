@@ -403,7 +403,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             mac_layout = false;
             break;
         case KC_1 ... KC_0:
-            set_held_key(keycode, record);
         case KC_A ... KC_Z:
         case KC_QUES:
         case KC_EXLM:
@@ -475,7 +474,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 switch (held_key) {
                     case KC_NO:
                         register_code(KC_LSFT);
-                        // set_mods(MOD_BIT(KC_LSFT));
                         mod_interrupt = false;
                         break;
                     default:
@@ -492,14 +490,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case MO(2):
             if (record->event.pressed) {;;
                 if (held_key != KC_NO) {
-                    switch (held_key) {
-                        case KC_1 ... KC_0:
-                            clear_mods();
-                            tap_code(KC_DOT);
-                            return false;
-                        default:
-                            return repeat_held_key(keycode, record);
-                    }
+                    return repeat_held_key(keycode, record);
                 } else {
                     if (get_mods() == MOD_BIT(KC_LSFT)) {
                         caps_word_on();
