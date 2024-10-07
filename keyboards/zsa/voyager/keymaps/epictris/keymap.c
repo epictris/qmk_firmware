@@ -10,13 +10,13 @@
 #define VOL_UP KC_KB_VOLUME_UP
 
 // LAYER 0 (BASE)
-#define L0_L4   _______,    KC_7,       KC_8,       KC_9,       KC_0,       MO(4)
+#define L0_L4   M0(4),      KC_7,       KC_8,       KC_9,       KC_0,       _______
 #define L0_L3   KC_6,       KC_Q,       KC_W,       KC_C,       KC_P,       KC_B
 #define L0_L2   KC_QUES,    KC_A,       KC_R,       KC_S,       KC_T,       KC_G
 #define L0_L1   VOL_DN,     KC_Z,       KC_X,       KC_F,       KC_D,       KC_V
 #define L0_L0   KC_SPC,     MO(2)
 
-#define L0_R4   MO(4),      KC_1,       KC_2,       KC_3,       KC_4,       _______
+#define L0_R4   _______,    KC_1,       KC_2,       KC_3,       KC_4,       M0(4)
 #define L0_R3   KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_5
 #define L0_R2   KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       KC_COMM
 #define L0_R1   KC_K,       KC_H,       KC_UNDS,    KC_DOT,     KC_SLSH,    VOL_UP
@@ -44,7 +44,7 @@
 #define L2_L1   RGB_VAD,    UNDO,       CUT,        COPY,       PASTE,      FIND
 #define L2_L0   _______,    MO(2)
 
-#define L2_R4   _______,     A(KC_1),    A(KC_2),    A(KC_3),    A(KC_4),    _______
+#define L2_R4   _______,    A(KC_1),    A(KC_2),    A(KC_3),    A(KC_4),    _______
 #define L2_R3   KC_PGUP,    C(KC_L),    C(KC_U),    _______,    _______,    A(KC_5)
 #define L2_R2   KC_PGDN,    C(KC_N),    C(KC_D),    C(KC_I),    C(KC_O),    S(KC_A)
 #define L2_R1   _______,    _______,    _______,    _______,    SHEBANG,    RGB_VAI
@@ -52,17 +52,17 @@
 
 
 // LAYER 4 (Functions)
-#define L4_L4   KC_F11,     KC_F7,      KC_F8,      KC_F9,      KC_F10,     _______
+#define L4_L4   _______,     KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11
 #define L4_L3   KC_F6,      _______,    _______,    _______,    _______,    _______
 #define L4_L2   _______,    _______,    _______,    _______,    _______,    _______
 #define L4_L1   USE_MAC,    _______,    _______,    _______,    _______,    _______
 #define L4_L0   _______,    _______
 
-#define L4_R4   _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F12
-#define L4_R3   _______, _______, _______, _______, _______, KC_F5
-#define L4_R2   _______, _______, _______, _______, _______, _______
-#define L4_R1   _______, _______, _______, _______, _______, USE_LNX
-#define L4_R0   _______, _______
+#define L4_R4   KC_F12,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      _______
+#define L4_R3   _______,    _______,    _______,    _______,    _______,    KC_F5
+#define L4_R2   _______,    _______,    _______,    _______,    _______,    _______
+#define L4_R1   _______,    _______,    _______,    _______,    _______,    USE_LNX
+#define L4_R0   _______,    _______
 
 
 #define _LAYOUT(x) LAYOUT(x)
