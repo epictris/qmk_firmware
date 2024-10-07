@@ -10,13 +10,13 @@
 #define VOL_UP KC_KB_VOLUME_UP
 
 // LAYER 0 (BASE)
-#define L0_L4   M0(4),      KC_7,       KC_8,       KC_9,       KC_0,       _______
+#define L0_L4   M0(4),      KC_7,       KC_8,       KC_9,       KC_0,       KC_DOT
 #define L0_L3   KC_6,       KC_Q,       KC_W,       KC_C,       KC_P,       KC_B
 #define L0_L2   KC_QUES,    KC_A,       KC_R,       KC_S,       KC_T,       KC_G
 #define L0_L1   VOL_DN,     KC_Z,       KC_X,       KC_F,       KC_D,       KC_V
 #define L0_L0   KC_SPC,     MO(2)
 
-#define L0_R4   _______,    KC_1,       KC_2,       KC_3,       KC_4,       M0(4)
+#define L0_R4   KC_DOT,    KC_1,       KC_2,       KC_3,       KC_4,       M0(4)
 #define L0_R3   KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_5
 #define L0_R2   KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       KC_COMM
 #define L0_R1   KC_K,       KC_H,       KC_UNDS,    KC_DOT,     KC_SLSH,    VOL_UP
@@ -35,7 +35,6 @@
 #define L1_R2   KC_BSPC,    KC_ENT,     KC_ESC,     KC_COLN,    KC_BSLS,    KC_DLR
 #define L1_R1   KC_AMPR,    KC_PIPE,    KC_ASTR,    _______,    TILD_SLSH,  KC_BRIU
 #define L1_R0   _______,    _______
-
 
 // LAYER 2 (Navigation)
 #define L2_L4   _______,    A(KC_7),    A(KC_8),    A(KC_9),    A(KC_0),    _______
