@@ -84,7 +84,6 @@ enum custom_keycodes {
     M_SHIFT,
     TILD_SLSH,
     SHEBANG,
-    SLSH_GT,
     USE_MAC,
     USE_LNX,
     COPY,
@@ -104,8 +103,6 @@ void execute_macro(uint16_t keycode, keyrecord_t *record) {
             return SEND_STRING("~/");
         case SHEBANG:
             return SEND_STRING("#!/");
-        case SLSH_GT:
-            return SEND_STRING("/>");
     }
 }
 
@@ -399,11 +396,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case TILD_SLSH:
         case SHEBANG:
-        case SLSH_GT:
-            if (record->event.pressed) {
-                execute_macro(keycode, record);
-            }
-            break;
         case KC_MINS:
         case KC_COMM:
         case KC_DOT:
