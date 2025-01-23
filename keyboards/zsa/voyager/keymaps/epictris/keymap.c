@@ -82,11 +82,6 @@ enum custom_keycodes {
     TILD_SLSH,
     SHEBANG,
     SLSH_GT,
-    TM1,
-    TM2,
-    TM3,
-    TM4,
-    TM5,
     USE_MAC,
     USE_LNX,
     COPY,
@@ -100,24 +95,8 @@ enum custom_keycodes {
 
 bool mac_layout = true;
 
-void apply_tmux_prefix(uint16_t keycode) {
-    tap_code16(C(KC_B));
-    tap_code(keycode);
-}
-
-
 void execute_macro(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case TM1:
-            return apply_tmux_prefix(KC_1);
-        case TM2:
-            return apply_tmux_prefix(KC_2);
-        case TM3:
-            return apply_tmux_prefix(KC_3);
-        case TM4:
-            return apply_tmux_prefix(KC_4);
-        case TM5:
-            return apply_tmux_prefix(KC_5);
         case TILD_SLSH:
             return SEND_STRING("~/");
         case SHEBANG:
@@ -415,11 +394,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     switch (keycode) {
-        case TM1:
-        case TM2:
-        case TM3:
-        case TM4:
-        case TM5:
         case TILD_SLSH:
         case SHEBANG:
         case SLSH_GT:
