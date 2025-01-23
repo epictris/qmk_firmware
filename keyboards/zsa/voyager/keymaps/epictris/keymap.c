@@ -29,13 +29,13 @@
 // LAYER 1 (Symbols)
 #define L1_L4   _______,    KC_7,       KC_8,       KC_9,       KC_0,       _______
 #define L1_L3   KC_6,       KC_GRV,     KC_LBRC,    KC_TAB,     KC_LT,      KC_RBRC
-#define L1_L2   KC_CIRC,    KC_SCLN,    KC_LPRN,    KC_DQT,     KC_EQL,     KC_RPRN
+#define L1_L2   KC_BSLS,    KC_CIRC,    KC_LPRN,    KC_DQT,     KC_EQL,     KC_RPRN
 #define L1_L1   KC_BRID,    KC_TILD,    KC_LCBR,    KC_HASH,    KC_PERC,    KC_RCBR
 #define L1_L0   KC_SPC,     MO(2)
 
 #define L1_R4   _______,    KC_1,       KC_2,       KC_3,       KC_4,       _______
 #define L1_R3   KC_PLUS,    KC_GT,      KC_MINS,    KC_EXLM,    KC_AT,      KC_5
-#define L1_R2   KC_BSPC,    KC_ENT,     KC_ESC,     KC_COLN,    KC_BSLS,    KC_DLR
+#define L1_R2   KC_BSPC,    KC_ENT,     KC_ESC,     KC_COLN,    KC_DLR,     KC_SCLN
 #define L1_R1   KC_AMPR,    KC_PIPE,    KC_ASTR,    _______,    TILD_SLSH,  KC_BRIU
 #define L1_R0   _______,    _______
 
