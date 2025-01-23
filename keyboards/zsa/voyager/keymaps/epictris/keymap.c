@@ -6,8 +6,8 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 #include QMK_KEYBOARD_H
 
-#define VOL_DN KC_KB_VOLUME_DOWN
-#define VOL_UP KC_KB_VOLUME_UP
+#define VOL_DN KC_AUDIO_VOL_DOWN
+#define VOL_UP KC_AUDIO_VOL_UP
 
 // LAYER 0 (BASE)
 #define L0_L4   MO(4),      KC_7,       KC_8,       KC_9,       KC_0,       KC_DOT
@@ -52,15 +52,15 @@
 
 // LAYER 4 (Functions)
 #define L4_L4   _______,     KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11
-#define L4_L3   KC_F6,      _______,    _______,    _______,    _______,    _______
+#define L4_L3   KC_F6,      _______,    _______,    _______,    _______,    USE_MAC
 #define L4_L2   _______,    _______,    _______,    _______,    _______,    _______
-#define L4_L1   USE_MAC,    _______,    _______,    _______,    _______,    _______
+#define L4_L1   _______,    _______,    _______,    _______,    _______,    _______
 #define L4_L0   _______,    _______
 
 #define L4_R4   KC_F12,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      _______
-#define L4_R3   _______,    _______,    _______,    _______,    _______,    KC_F5
+#define L4_R3   USE_LNX,    _______,    _______,    _______,    _______,    KC_F5
 #define L4_R2   _______,    _______,    _______,    _______,    _______,    _______
-#define L4_R1   _______,    _______,    _______,    _______,    _______,    USE_LNX
+#define L4_R1   _______,    _______,    _______,    _______,    _______,    _______
 #define L4_R0   _______,    _______
 
 
@@ -78,7 +78,6 @@
 
 enum custom_keycodes {
     MOD_TMUX = SAFE_RANGE,
-    MOD_CTL_W,
     M_SHIFT,
     TILD_SLSH,
     SHEBANG,
@@ -125,35 +124,6 @@ void execute_macro(uint16_t keycode, keyrecord_t *record) {
             return SEND_STRING("#!/");
         case SLSH_GT:
             return SEND_STRING("/>");
-    }
-}
-uint16_t mod_ctl_w_release_key = KC_NO;
-bool mod_ctl_w_active = false;
-
-void apply_mod_ctl_w(uint16_t keycode, keyrecord_t *record) {
-    switch(keycode) {
-        case OSL(1):
-        case MO(2):
-        case M_SHIFT:
-        case OSM(KC_LSFT):
-            break;
-        case MOD_CTL_W:
-            if (record->event.pressed) {
-                mod_ctl_w_active = true;
-                mod_ctl_w_release_key = C(KC_W);
-            }
-            else {
-                mod_ctl_w_active = false;
-                tap_code16(mod_ctl_w_release_key);
-            }
-            break;
-        default:
-            if (record->event.pressed) {
-                if (mod_ctl_w_active) {
-                    mod_ctl_w_release_key = KC_NO;
-                    tap_code16(C(KC_W));
-                }
-            }
     }
 }
 
@@ -387,10 +357,11 @@ void use_os_binding(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+bool enabling_caps_word = false;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     apply_mod_tmux(keycode, record);
-    apply_mod_ctl_w(keycode, record);
     apply_mod_bsls(keycode, record);
     break_caps_word(keycode, record);
     use_os_binding(keycode, record);
@@ -494,12 +465,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 } else {
                     if (get_mods() == MOD_BIT(KC_LSFT)) {
                         caps_word_on();
+                        enabling_caps_word = true;
                         break;
                     }
                     caps_word_off();
                 }
                 clear_mods();
             } else {
+                if (enabling_caps_word) {
+                    enabling_caps_word = false;
+                } else {
+                    caps_word_off();
+                }
                 unregister_code(KC_LSFT);
                 clear_oneshot_mods();
             }
