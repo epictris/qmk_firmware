@@ -10,7 +10,7 @@
 #define VOL_UP KC_AUDIO_VOL_UP
 
 // LAYER 0 (BASE)
-#define L0_L4   MO(4),      KC_7,       KC_8,       KC_9,       KC_0,       KC_DOT
+#define L0_L4   MO(4),      KC_7,       KC_8,       KC_9,       KC_0,       KC_COMM
 #define L0_L3   KC_6,       KC_Q,       KC_W,       KC_C,       KC_P,       KC_B
 #define L0_L2   KC_QUES,    KC_A,       KC_R,       KC_S,       KC_T,       KC_G
 #define L0_L1   VOL_DN,     KC_Z,       KC_X,       KC_F,       KC_D,       KC_V
