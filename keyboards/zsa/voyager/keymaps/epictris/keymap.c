@@ -6,6 +6,8 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 #include QMK_KEYBOARD_H
 
+#define OS_DETECTION_KEYBOARD_RESET
+
 #define VOL_DN KC_AUDIO_VOL_DOWN
 #define VOL_UP KC_AUDIO_VOL_UP
 
@@ -478,6 +480,26 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
                 mod_interrupt = true;
             }
     }
+}
+
+bool process_detected_host_os_kb(os_variant_t detected_os) {
+    if (!process_detected_host_os_user(detected_os)) {
+        return false;
+    }
+    switch (detected_os) {
+        case OS_MACOS:
+            mac_layout = true;
+            break;
+        case OS_WINDOWS:
+        case OS_LINUX:
+            mac_layout = false;
+            break;
+        case OS_IOS:
+        case OS_UNSURE:
+            break;
+    }
+
+    return true;
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
