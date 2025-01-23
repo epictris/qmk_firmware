@@ -41,14 +41,14 @@
 
 // LAYER 2 (Navigation)
 #define L2_L4   _______,    A(KC_7),    A(KC_8),    A(KC_9),    A(KC_0),    _______
-#define L2_L3   A(KC_6),    KC_Q,       KC_HOME,    KC_UP,      KC_END,     KC_DEL
-#define L2_L2   S(KC_I),    ALL,        KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_G
+#define L2_L3   A(KC_6),    KC_Q,       KC_HOME,    KC_UP,      KC_END,     _______
+#define L2_L2   S(KC_I),    ALL,        KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL
 #define L2_L1   RGB_VAD,    UNDO,       CUT,        COPY,       PASTE,      FIND
 #define L2_L0   _______,    MO(2)
 
 #define L2_R4   _______,    A(KC_1),    A(KC_2),    A(KC_3),    A(KC_4),    _______
-#define L2_R3   KC_PGUP,    C(KC_L),    C(KC_U),    _______,    _______,    A(KC_5)
-#define L2_R2   KC_PGDN,    C(KC_N),    C(KC_D),    C(KC_I),    C(KC_O),    S(KC_A)
+#define L2_R3   _______,    C(KC_L),    C(KC_U),    _______,    _______,    A(KC_5)
+#define L2_R2   _______,    C(KC_N),    C(KC_D),    C(KC_I),    C(KC_O),    S(KC_A)
 #define L2_R1   _______,    _______,    _______,    _______,    SHEBANG,    RGB_VAI
 #define L2_R0   KC_MEH,     MO(3)
 
@@ -61,8 +61,8 @@
 #define L4_L0   _______,    _______
 
 #define L4_R4   KC_F12,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      _______
-#define L4_R3   USE_LNX,    _______,    _______,    _______,    _______,    KC_F5
-#define L4_R2   _______,    _______,    _______,    _______,    _______,    _______
+#define L4_R3   USE_LNX,    _______,    KC_PGUP,    _______,    _______,    KC_F5
+#define L4_R2   _______,    _______,    KC_PGDN,    _______,    _______,    _______
 #define L4_R1   _______,    _______,    _______,    _______,    _______,    _______
 #define L4_R0   _______,    _______
 
