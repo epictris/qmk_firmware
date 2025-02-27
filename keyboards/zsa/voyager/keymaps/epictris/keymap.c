@@ -396,6 +396,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case TILD_SLSH:
         case SHEBANG:
+            if (record->event.pressed) {
+                execute_macro(keycode, record);
+            }
+            break;
         case KC_MINS:
         case KC_COMM:
         case KC_DOT:
